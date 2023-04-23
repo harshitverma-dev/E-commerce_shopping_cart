@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { NavDropdown, Navbar, Nav, Form, Container, Button, Badge, Image, Row, Col } from 'react-bootstrap'
+import { NavDropdown, Navbar, Nav, Form, Container, Button, Badge, Image, Row, Col, NavLink } from 'react-bootstrap'
 import { CiShoppingCart } from "react-icons/ci";
 import { Cart } from '../context/Context';
 import { AiOutlineDelete } from "react-icons/ai";
-import { useNavigate } from 'react-router-dom/dist';
+import { Link, useNavigate } from 'react-router-dom/dist';
 
 const Header = () => {
     const { state, dispatch } = useContext(Cart);
@@ -12,7 +12,9 @@ const Header = () => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="#">Shopping Cart</Navbar.Brand>
+                <Link to="/home" style={{textDecorationLine: "none"}}>
+                    <Navbar.Brand>Shopping Cart</Navbar.Brand>
+                </Link>
                 <Form>
                     <Form.Control
                         type="search"
@@ -37,12 +39,12 @@ const Header = () => {
                                                 {items.name}
                                             </span>
                                             <span>
-                                                <AiOutlineDelete size={20} style={{ cursor: "pointer" }} onClick={()=>{
+                                                <AiOutlineDelete size={20} style={{ cursor: "pointer" }} onClick={() => {
                                                     dispatch({
                                                         type: "Remove_From_Cart",
                                                         payload: items.id
                                                     })
-                                                }}/>
+                                                }} />
                                             </span>
                                         </div>
                                     )
