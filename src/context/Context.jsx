@@ -11,7 +11,7 @@ const Context = ({ children }) => {
         id: faker.datatype.uuid(),
         name: faker.commerce.productName(),
         price: faker.commerce.price(),
-        image: faker.image.fashion(),
+        image: faker.image.transport(),
         isStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
         fastDelivery: faker.datatype.boolean(),
         ratings: faker.helpers.arrayElement([1, 2, 3, 4, 5])
@@ -19,7 +19,7 @@ const Context = ({ children }) => {
     // console.log(products)
     const [state, dispatch] = useReducer(cartReducer, {
         products: products,
-        cart: []
+        cart: JSON.parse(localStorage.getItem("carts")) || []
     });
 
     console.log(state)

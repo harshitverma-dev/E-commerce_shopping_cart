@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Button, Card, Col } from 'react-bootstrap';
 import Rating from './Rating';
 import { useContext } from 'react';
@@ -6,6 +6,10 @@ import { Cart } from '../context/Context';
 
 const SingleProduct = ({ items }) => {
     const { state, dispatch } = useContext(Cart);
+
+    useEffect(() => {
+        localStorage.setItem('carts', JSON.stringify(state.cart));
+    }, [state.cart])
     return (
         <Col>
             <Card>
@@ -13,7 +17,7 @@ const SingleProduct = ({ items }) => {
                 <Card.Body>
                     <Card.Title>{items.name}</Card.Title>
                     <Card.Text>
-                        {items.price.split('.')[0]}
+                        ₹ {items.price.split('.')[0]}
                     </Card.Text>
                     <Card.Text className='d-flex'>
                         <Rating rate={items.ratings} />
@@ -46,7 +50,6 @@ const SingleProduct = ({ items }) => {
                             </Button>
                         )
                     }
-
                 </Card.Body>
             </Card>
         </Col>
