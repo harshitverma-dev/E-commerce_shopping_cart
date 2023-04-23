@@ -1,12 +1,21 @@
 import React, { useContext } from 'react'
 import { Cart } from '../context/Context';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { AiOutlineDelete } from "react-icons/ai";
 import ItemsSelect from '../components/ItemsSelect';
 
 const CartPage = () => {
     const { state, dispatch } = useContext(Cart);
+    const onChange = (e, id) => {
+        dispatch({
+            type: "Change_Cart_Qty",
+            payload: {
+                id: id,
+                qty: e.target.value
+            }
+        })
+    }
     return (
         <Container>
             {
@@ -26,7 +35,11 @@ const CartPage = () => {
                                 <Col lg={4}>
                                     <Row>
                                         <Col lg={10}>
-                                            <ItemsSelect />
+                                            <ItemsSelect
+                                                value={cartItems.qty}
+                                                items={cartItems.isStock}
+                                                onChange={(e) => onChange(e, cartItems.id)}
+                                            />
                                         </Col>
                                         <Col lg={2}>
                                             <AiOutlineDelete size={20} style={{ cursor: "pointer" }} onClick={() => {
