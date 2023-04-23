@@ -13,7 +13,6 @@ const Home = () => {
             <Filter />
             <div className='all-products-list'>
                 <Row xs={1} sm={2} md={3} lg={4} className="gx-4 gy-4">
-
                     {
                         state.products.map((items, index) => {
                             return (
@@ -21,7 +20,6 @@ const Home = () => {
                             )
                         })
                     }
-
                 </Row>
             </div>
         </Container>

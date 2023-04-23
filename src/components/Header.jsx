@@ -4,6 +4,7 @@ import { CiShoppingCart } from "react-icons/ci";
 import { Cart } from '../context/Context';
 import { AiOutlineDelete } from "react-icons/ai";
 import { Link, useNavigate } from 'react-router-dom/dist';
+import Rating from './Rating';
 
 const Header = () => {
     const { state, dispatch } = useContext(Cart);
@@ -12,7 +13,7 @@ const Header = () => {
     return (
         <Navbar bg="light" expand="lg">
             <Container>
-                <Link to="/home" style={{textDecorationLine: "none"}}>
+                <Link to="/home" style={{ textDecorationLine: "none" }}>
                     <Navbar.Brand>Shopping Cart</Navbar.Brand>
                 </Link>
                 <Form>
@@ -36,7 +37,10 @@ const Header = () => {
                                         <div className='d-flex justify-content-between mb-3' style={{ width: "20rem" }}>
                                             <span className='d-flex'>
                                                 <img width={80} height={60} src={items.image} className='me-2' />
-                                                {items.name}
+                                                <div className='d-flex flex-column'>
+                                                    <div>{items.name}</div>
+                                                    {items.price} <span className='d-flex'><Rating rate={items.ratings} /></span>
+                                                </div>
                                             </span>
                                             <span>
                                                 <AiOutlineDelete size={20} style={{ cursor: "pointer" }} onClick={() => {
